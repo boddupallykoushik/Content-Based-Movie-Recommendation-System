@@ -1,104 +1,136 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Movie Recommendation System
+
+This is a simple movie recommendation system I built using Python. It suggests movies based on the *genre* and *overview* (description) of a selected movie.
+
+When you pick a movie, the system compares its genre and overview with other movies in the dataset and recommends a few that are most similar. I used Streamlit for the web interface, pickle to store the processed data, and requests to optionally fetch movie posters or extra details from an external API like TMDb.
 
 ---
 
-# svelte app
+## Why I Made This
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+I’ve always been curious about how platforms like Netflix or YouTube suggest content. So I tried building my own basic version using content-based filtering. This project helped me understand how to process text data, calculate similarity between items, and build an end-to-end ML-powered web app.
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+---
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+## Tools & Libraries Used
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+- Python  
+- Pandas  
+- Scikit-learn  
+- Streamlit  
+- Pickle (for saving/loading vectorizer and similarity matrix)  
+- *Requests* (for fetching movie posters or external info)
 
+---
 
-## Get started
+## How It Works
 
-Install the dependencies...
+1. Loads a dataset with movie titles, genres, and overviews.
+2. Combines the genre and overview into a single string for each movie.
+3. Uses CountVectorizer to turn this combined text into numerical vectors.
+4. Computes cosine similarity between all movie vectors.
+5. Saves the vectorizer and similarity matrix using pickle for faster loading.
+6. When a user selects a movie, the app recommends the top 5 most similar ones.
+7. Optionally, it uses the requests library to fetch movie posters or metadata from APIs (like TMDb).
 
-```bash
-cd svelte-app
-npm install
-```
+---
 
-...then start [Rollup](https://rollupjs.org):
+## How to Run the App
 
-```bash
-npm run dev
-```
+1. *Clone the repository:*
+   bash
+   git clone https://github.com/your-username/movie-recommender.git
+   cd movie-recommender
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+2. Install the dependencies:
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+pip install -r requirements.txt
 
 
-## Single-page app mode
+3. Run the app:
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+streamlit run app.py
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
 
-```js
-"start": "sirv public --single"
-```
+4. Open your browser at http://localhost:8501
 
-## Using TypeScript
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
 
-```bash
-node scripts/setupTypeScript.js
-```
 
-Or remove the script via:
+---
+Features:
 
-```bash
-rm scripts/setupTypeScript.js
-```
+Suggests movies using genre + overview similarity
 
-## Deploying to the web
+Uses cosine similarity and CountVectorizer
 
-### With [Vercel](https://vercel.com)
+Pre-processed with pickle for fast loading
 
-Install `vercel` if you haven't already:
+Optionally fetches posters using requests
 
-```bash
-npm install -g vercel
-```
+Clean, interactive UI built with Streamlit
 
-Then, from within your project folder:
 
-```bash
-cd public
-vercel deploy --name my-project
-```
 
-### With [surge](https://surge.sh/)
+---
+Future Improvements:
 
-Install `surge` if you haven't already:
+Display posters and more movie info in the UI
 
-```bash
-npm install -g surge
-```
+Add filters like release year, rating, or language
 
-Then, from within your project folder:
+Try TF-IDF or embeddings for smarter recommendations
 
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Explore collaborative filtering or hybrid approaches
+
+Deploy publicly using Streamlit Cloud
+
+
+
+---
+About Me:
+
+Hi! I'm Koushik Boddupally, a B.Tech student in Computer Science (AI & ML) from Hyderabad. I enjoy learning by building projects that apply what I learn in a practical way. This one helped me explore how simple NLP techniques can create useful tools.
+
+LinkedIn: linkedin.com/in/koushik-boddupally-2a2a39286
+
+
+
+---
+
+Thanks for checking out my project!
+Feel free to try it, fork it, or suggest improvements 😊
+
+---
+
+### Final To-Do Checklist for You:
+
+- Save this as `README.md` in your repo.
+- Replace `your-username` with your actual GitHub username.
+- Add a `requirements.txt` with:
+  txt
+  streamlit
+  pandas
+  scikit-learn
+  requests
+
+Make sure your repo contains:
+
+app.py (Streamlit app)
+
+vectorizer.pkl, similarity.pkl (if used)
+
+movies.csv (your dataset)
+
+
+
+Let me know if you want help:
+
+Writing or organizing your actual code files
+
+Deploying it to Streamlit Cloud
+
+Creating a nice GitHub banner or preview GIF
+
+
+Ready when you are!
